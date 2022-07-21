@@ -3,8 +3,12 @@ import ProductCard from "../components/ProductCard";
 
 import styled from "styled-components";
 
+import getProducts from "./../api/products/getProducts";
+import thisCart from "./../api/cart/Cart";
+
 import "bootstrap/dist/css/bootstrap.css";
 
+const cart = new thisCart();
 const Head = styled.div`
   div h1 {
     transition: all 0.6s ease-in-out;
@@ -38,11 +42,13 @@ export default class Home extends Component {
     super(props);
     this.state = {
       mounted: false,
+      products: [],
     };
   }
 
   componentDidMount() {
     this.showHeadText();
+    getProducts().then((products) => this.setState({ products: products }));
   }
 
   showHeadText = () => {
@@ -91,9 +97,23 @@ export default class Home extends Component {
         </Head>
         <div className="container mt-3">
           <div className="row">
-            <div className="col-lg-3 col-sm-6">
-              <ProductCard price={2000} />
-            </div>
+            {this.state.products.slice(0, 8).map((product) => (
+              <div key={product.id} className="col-lg-3 col-sm-6 col-12 my-3">
+                <ProductCard
+                  navigate={this.props.navigate}
+                  key={product.id}
+                  idNum={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  count={
+                    cart.isInCart(product.id.toString())
+                      ? cart.getCountCart(product.id.toString())
+                      : 0
+                  }
+                />
+              </div>
+            ))}
           </div>
         </div>
       </>
