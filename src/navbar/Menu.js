@@ -54,7 +54,6 @@ export default class Menu extends Component {
   render() {
     return (
       <Div>
-        <div>hello</div>
         <Cart />
         <Ul menuOpen={this.props.menuOpen}>
           <li>

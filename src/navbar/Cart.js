@@ -22,7 +22,16 @@ const Div = styled.div`
   position: relative;
 
   .cartSummaryBtn {
-    padding: 10px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 7px 0px #888888;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    color: #0d6efd;
+  }
+  .cart-icon {
+    color: #0d6efd;
   }
   .cartSummary {
     width: 300px;
@@ -70,19 +79,26 @@ export default class Cart extends Component {
         onMouseLeave={() => this.setState({ cartSumShow: false })}
       >
         <div className="cartSummaryBtn">
-          <FaShoppingBag />
+          <FaShoppingBag className="cart-icon" />
         </div>
         <div className="cartSummary rounded shadow-sm p-1">
           <div className="cartProducts">
             <div>
-              {this.state.cart.map((product) => {
-                return (
-                  <ProductCart
-                    key={product.productId}
-                    idNum={product.productId}
-                  />
-                );
-              })}
+              {this.state.cart.length !== 0 &&
+                this.state.cart.map((product) => {
+                  return (
+                    <ProductCart
+                      key={product.productId}
+                      idNum={product.productId}
+                    />
+                  );
+                })}
+
+              {this.state.cart.length === 0 && (
+                <div className="w-100 mt-4 text-center">
+                  there is no item in cart
+                </div>
+              )}
             </div>
           </div>
         </div>
