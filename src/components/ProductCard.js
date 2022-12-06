@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const Card = styled.div`
   border-radius: 10px;
-  height: 25rem;
+  height: 27rem;
   justify-content: center;
   padding: 0.5rem;
 
@@ -22,6 +22,14 @@ const Card = styled.div`
 
   .mainImage {
     height: 13rem;
+  }
+  .title {
+    display: block; /* or inline-block */
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 3.6em;
+    line-height: 1.8em;
   }
 `;
 class ProductCard extends Component {
@@ -46,8 +54,8 @@ class ProductCard extends Component {
             ></div>
           </div>
           <div className="footer pt-3">
-            <div className="w-100 text-center text-secondary">
-              {this.props.name}
+            <div className="w-100 text-center text-secondary title">
+              {this.props.title}
             </div>
             <div className="shopDetails">
               <div

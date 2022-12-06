@@ -4,6 +4,8 @@ import "./App.css";
 import Body from "./Body";
 import Footer from "./Footer";
 import Header from "./Header";
+import "animate.css/animate.min.css";
+
 
 export const SetCartCountContext = React.createContext();
 export const CartCountContext = React.createContext();

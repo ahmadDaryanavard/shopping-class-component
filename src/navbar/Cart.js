@@ -22,28 +22,28 @@ const Div = styled.div`
   position: relative;
 
   .cartSummaryBtn {
-    font-size: 25px;
+    transition: all 0.5s linear;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: ${(props) => (props.show ? "#eee" : "#fff")};
+    border: 1px solid #888;
     display: flex;
     align-items: center;
-    box-shadow: 0 0 7px 0px #888888;
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    color: #0d6efd;
   }
-  .cart-icon {
-    color: #0d6efd;
+  .cartSummaryBtn:hover {
+    cursor: pointer;
   }
   .cartSummary {
+    transition: all 0.3s linear;
     width: 300px;
     height: 350px;
     position: absolute;
-    top: 35px;
+    top: 39px;
     left: 0px;
     background-color: white;
     display: ${(props) => (props.show ? "flex" : "none")};
     flex-direction: column;
     overflow: hidden;
-    transition: 0.3s linear;
   }
 
   .cartProducts {
@@ -79,26 +79,20 @@ export default class Cart extends Component {
         onMouseLeave={() => this.setState({ cartSumShow: false })}
       >
         <div className="cartSummaryBtn">
-          <FaShoppingBag className="cart-icon" />
+          <div style={{ marginRight: 10 }}>My Cart</div>
+          <FaShoppingBag size="24" color="gray" style={{ marginTop: -4 }} />
         </div>
         <div className="cartSummary rounded shadow-sm p-1">
           <div className="cartProducts">
             <div>
-              {this.state.cart.length !== 0 &&
-                this.state.cart.map((product) => {
-                  return (
-                    <ProductCart
-                      key={product.productId}
-                      idNum={product.productId}
-                    />
-                  );
-                })}
-
-              {this.state.cart.length === 0 && (
-                <div className="w-100 mt-4 text-center">
-                  there is no item in cart
-                </div>
-              )}
+              {this.state.cart.map((product) => {
+                return (
+                  <ProductCart
+                    key={product.productId}
+                    idNum={product.productId}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

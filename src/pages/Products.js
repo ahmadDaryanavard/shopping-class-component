@@ -39,6 +39,7 @@ export default class Products extends Component {
                   name={product.name}
                   price={product.price}
                   image={product.image}
+                  title={product.title}
                   count={
                     cart.isInCart(product.id.toString())
                       ? cart.getCountCart(product.id.toString())

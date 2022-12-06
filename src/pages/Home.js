@@ -7,6 +7,7 @@ import getProducts from "./../api/products/getProducts";
 import thisCart from "./../api/cart/Cart";
 
 import "bootstrap/dist/css/bootstrap.css";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 const cart = new thisCart();
 const Head = styled.div`
@@ -34,7 +35,7 @@ const Head = styled.div`
   div h1,
   div h4,
   div h6 {
-    margin-top: 10px;
+    margin-top: 30px;
   }
 `;
 export default class Home extends Component {
@@ -99,19 +100,21 @@ export default class Home extends Component {
           <div className="row">
             {this.state.products.slice(0, 8).map((product) => (
               <div key={product.id} className="col-lg-3 col-sm-6 col-12 my-3">
-                <ProductCard
-                  navigate={this.props.navigate}
-                  key={product.id}
-                  idNum={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  count={
-                    cart.isInCart(product.id.toString())
-                      ? cart.getCountCart(product.id.toString())
-                      : 0
-                  }
-                />
+                <AnimationOnScroll animateIn="animate__fadeIn">
+                  <ProductCard
+                    navigate={this.props.navigate}
+                    key={product.id}
+                    idNum={product.id}
+                    name={product.name}
+                    price={product.price}
+                    image={product.image}
+                    count={
+                      cart.isInCart(product.id.toString())
+                        ? cart.getCountCart(product.id.toString())
+                        : 0
+                    }
+                  />
+                </AnimationOnScroll>
               </div>
             ))}
           </div>
